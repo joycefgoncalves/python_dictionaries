@@ -1,0 +1,42 @@
+# Initial hotel room structure
+hotel_rooms = {
+    "101": {"status": "available", "customer": ""},
+    "102": {"status": "booked", "customer": "John Doe"}
+}
+
+# Function to book a room
+def book_room(room_number, customer_name):
+    if room_number in hotel_rooms:
+        if hotel_rooms[room_number]["status"] == "available":
+            hotel_rooms[room_number]["status"] = "booked"
+            hotel_rooms[room_number]["customer"] = customer_name
+            print(f"Room {room_number} has been booked for {customer_name}.")
+        else:
+            print(f"Room {room_number} is already booked.")
+    else:
+        print(f"Room {room_number} does not exist.")
+
+# Function to check out a customer
+def check_out(room_number):
+    if room_number in hotel_rooms:
+        if hotel_rooms[room_number]["status"] == "booked":
+            hotel_rooms[room_number]["status"] = "available"
+            hotel_rooms[room_number]["customer"] = ""
+            print(f"Customer checked out from Room {room_number}.")
+        else:
+            print(f"Room {room_number} is not booked.")
+    else:
+        print(f"Room {room_number} does not exist.")
+
+# Function to display the status of all rooms
+def display_status():
+    print("Room Status:")
+    for room_number, details in hotel_rooms.items():
+        print(f"Room {room_number}: {details['status'].capitalize()} - {details['customer']}")
+
+# Test the functions
+book_room("103", "Alice")
+book_room("102", "Bob")  # This should print that the room is already booked
+check_out("101")
+check_out("104")  # This should print that the room does not exist
+display_status()
